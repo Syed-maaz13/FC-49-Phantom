@@ -5,15 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link
-      rel="stylesheet"
-      href="https://bootswatch.com/5/zephyr/bootstrap.min.css"
-    />
-    <script
-      src="https://kit.fontawesome.com/5e0d071893.js"
-      crossorigin="anonymous"
-    ></script>
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+    crossorigin="anonymous"
+  />
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="https://bootswatch.com/5/zephyr/bootstrap.min.css"
+  />
+  <script
+    src="https://kit.fontawesome.com/5e0d071893.js"
+    crossorigin="anonymous"
+  ></script>
     <title>About | Bus Stickers</title>
   </head>
   <body>
@@ -35,16 +45,19 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link" href="travel.html">Home </a>
+              <a class="nav-link" href="travel.html"
+                >Home
+                <span class="visually-hidden">(current)</span>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="sticker.html">Your Sticker </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#"
-                >About
-                <span class="visually-hidden">(current)</span>
-              </a>
+              <a class="nav-link active" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
             </li>
           </ul>
         </div>
@@ -65,75 +78,57 @@
       </p>
     </div>
 
-    <footer class="bg-dark text-center text-white" style="position:fixed;bottom:0; width:100%">
+    <footer style="background-color: #000000;">
       <div class="container p-4">
-        <section class="mb-4">
-          <a
-            class="btn btn-outline-dark btn-floating m-1 text-white"
-            href="https://github.com/Syed-maaz13/FC-49-Phantom"
-            target="_blank"
-            role="button"
-            ><i class="fab fa-github"></i
-          ></a>
-        </section>
-
-        <section class="mb-4">
-          <p>
-            This project is a part of Fantom Code Hackathon 2022. It is made by
-            Syed Ibrahim Maaz, Tejas Ganesh Joshi, Shravya and Harshita from
-            RVITM.
-          </p>
-          <p>Powered by <a href="https://goqr.me/" class="link-light">GOQR API</a> and <a href="https://stipop.io/en" class="link-light">Stipop API</a>. Made with Bootstrap.</p>
-        </section>
-
-        <section>
-          <div class="row">
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase text-primary">Links</h5>
-
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#!" class="text-white">Link 1</a>
-                </li>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase text-primary">Links</h5>
-
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#!" class="text-white">Link 1</a>
-                </li>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase text-primary">Links</h5>
-
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#!" class="text-white">Link 1</a>
-                </li>
-
-            </div>
-
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 class="text-uppercase text-primary">Links</h5>
-
-              <ul class="list-unstyled mb-0">
-                <li>
-                  <a href="#!" class="text-white">Link 1</a>
-                </li>
-              </ul>
-            </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-12 mb-4">
+            <h5 class="mb-3 text-light">Info</h5>
+            <p>
+              This project is a part of Fantom Code Hackathon 2022.<br> Made by
+              Syed Ibrahim Maaz, Tejas Ganesh Joshi, Shravya Suresh and Harshita JK from
+              RVITM.
+            </p>
           </div>
-        </section>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-3 text-light">Powered by</h5>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1">
+                <a href="https://goqr.me/" style="color: #4f4f4f;">GOQR API</a>
+              </li>
+              <li class="mb-1">
+                <a href="https://stipop.io/en" style="color: #4f4f4f;">Stipop API</a>
+              </li>
+              <li class="mb-1">
+                Made with Bootstrap
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h5 class="mb-1 text-light">Profiles</h5>
+            <table class="table" style="border-color: #666;">
+              <tbody>
+                <tr>
+                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/harsha-t11"><i class="fab fa-github"></i> Harshitha JK</a></td>
+                </tr>
+                <tr>
+                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/shravya172000"><i class="fab fa-github"></i> Shravya Suresh</a></td>
+                </tr>
+                <tr>
+                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/Syed-maaz13"><i class="fab fa-github"></i> Syed Ibrahim Maaz</a></td>
+                </tr>
+                <tr>
+                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/2001tejasjoshi"><i class="fab fa-github"></i> Tejas Ganesh Joshi</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        &copy 2022 All rights reserved.
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022 All rights reserved.
+        <a class="text-light" href="https://github.com/Syed-maaz13/FC-49-Phantom.git"><i class="fab fa-github"></i>Github Project</a>
       </div>
+      <!-- Copyright -->
     </footer>
   </body>
 </html>
