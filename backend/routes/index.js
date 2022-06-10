@@ -66,7 +66,7 @@ const calculatePrice = (source, dest) => {
 };
 
 const generateToken = (id) => {
-  // Creates JSON Web Token with
+  // Creates JSON Web Token with user id and a secret
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
@@ -80,6 +80,7 @@ const validate = (source, dest) => {
     'Pump House',
     'East End Circle',
   ];
+  // Must be in list and must not be the same
   if (
     !listofDestinations.includes(source) ||
     !listofDestinations.includes(dest) ||
