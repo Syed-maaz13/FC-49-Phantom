@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const app = express();
 const cors = require('cors');
 app.use(
@@ -10,11 +11,13 @@ app.use(
 );
 
 // Load config
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: '../config/config.env' });
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(cookieParser());
 
 // Logging
 if (process.env.NODE_ENV === 'development') {
@@ -24,7 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 // Routes
 app.use('/', require('./routes/index'));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on PORT ${PORT}`)
