@@ -24,7 +24,7 @@
       src="https://kit.fontawesome.com/5e0d071893.js"
       crossorigin="anonymous"
     ></script>
-    
+
     <title>Bus Booking Form | Bus Stickers</title>
   </head>
   <body>
@@ -62,26 +62,41 @@
       </div>
     </nav>
     <div class="container mt-3">
+      <div id="alertPlaceholder"></div>
       <form id="start">
         <fieldset>
           <legend>Travel Form</legend>
 
           <div class="form-group">
-            <label for="exampleSelect1" class="form-label mt-4">Choose Starting Point</label>
-            <select class="form-select" id="exampleSelect1" name="source" required>
+            <label for="exampleSelect1" class="form-label mt-4"
+              >Choose Starting Point</label
+            >
+            <select
+              class="form-select"
+              id="exampleSelect1"
+              name="source"
+              required
+            >
               <option id="0000" disabled selected>Select</option>
               <option id="1000">Jayanagara 4th Block</option>
               <option id="2000">Sanjay Gandhi Hospital</option>
               <option id="3000">Carmel Convent</option>
               <option id="4000">Pump House</option>
-              <option id="5000">East End Circle</option >
+              <option id="5000">East End Circle</option>
             </select>
           </div>
           <br />
 
           <div class="form-group">
-            <label for="exampleSelect2" class="form-label mt-4">Choose Destination Point</label>
-            <select class="form-select" id="exampleSelect2" name="dest" required>
+            <label for="exampleSelect2" class="form-label mt-4"
+              >Choose Destination Point</label
+            >
+            <select
+              class="form-select"
+              id="exampleSelect2"
+              name="dest"
+              required
+            >
               <option id="0001" disabled selected>Select</option>
               <option id="1001">Jayanagara 4th Block</option>
               <option id="2001">Sanjay Gandhi Hospital</option>
@@ -91,62 +106,96 @@
             </select>
           </div>
           <br />
-          <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" id="submit" class="btn btn-primary">
+            Submit
+          </button>
         </fieldset>
       </form>
-      <br>
-      <br>
-      <br>
+      <br />
+      <br />
+      <br />
     </div>
-    <footer style="background-color: #000000;">
+    <footer style="background-color: #000000">
       <div class="container p-4">
         <div class="row">
           <div class="col-lg-6 col-md-12 mb-4">
             <h5 class="mb-3 text-light">Info</h5>
             <p>
-              This project is a part of Fantom Code Hackathon 2022.<br> Made by
-              Syed Ibrahim Maaz, Tejas Ganesh Joshi, Shravya Suresh and Harshita JK from
-              RVITM.
+              This project is a part of Fantom Code Hackathon 2022.<br />
+              Made by Syed Ibrahim Maaz, Tejas Ganesh Joshi, Shravya Suresh and
+              Harshita JK from RVITM.
             </p>
           </div>
           <div class="col-lg-3 col-md-6 mb-4">
             <h5 class="mb-3 text-light">Powered by</h5>
             <ul class="list-unstyled mb-0">
               <li class="mb-1">
-                <a href="https://goqr.me/" style="color: #4f4f4f;">GOQR API</a>
+                <a href="https://goqr.me/" style="color: #4f4f4f">GOQR API</a>
               </li>
               <li class="mb-1">
-                <a href="https://stipop.io/en" style="color: #4f4f4f;">Stipop API</a>
+                <a href="https://stipop.io/en" style="color: #4f4f4f"
+                  >Stipop API</a
+                >
               </li>
-              <li class="mb-1">
-                Made with Bootstrap
-              </li>
+              <li class="mb-1">Made with Bootstrap</li>
             </ul>
           </div>
           <div class="col-lg-3 col-md-6 mb-4">
             <h5 class="mb-1 text-light">Profiles</h5>
-            <table class="table" style="border-color: #666;">
+            <table class="table" style="border-color: #666">
               <tbody>
                 <tr>
-                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/harsha-t11"><i class="fab fa-github"></i> Harshitha JK</a></td>
+                  <td>
+                    <a
+                      class="text-light"
+                      style="text-decoration: none"
+                      href="https://github.com/harsha-t11"
+                      ><i class="fab fa-github"></i> Harshitha JK</a
+                    >
+                  </td>
                 </tr>
                 <tr>
-                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/shravya172000"><i class="fab fa-github"></i> Shravya Suresh</a></td>
+                  <td>
+                    <a
+                      class="text-light"
+                      style="text-decoration: none"
+                      href="https://github.com/shravya172000"
+                      ><i class="fab fa-github"></i> Shravya Suresh</a
+                    >
+                  </td>
                 </tr>
                 <tr>
-                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/Syed-maaz13"><i class="fab fa-github"></i> Syed Ibrahim Maaz</a></td>
+                  <td>
+                    <a
+                      class="text-light"
+                      style="text-decoration: none"
+                      href="https://github.com/Syed-maaz13"
+                      ><i class="fab fa-github"></i> Syed Ibrahim Maaz</a
+                    >
+                  </td>
                 </tr>
                 <tr>
-                  <td><a class="text-light" style="text-decoration: none;" href="https://github.com/2001tejasjoshi"><i class="fab fa-github"></i> Tejas Ganesh Joshi</a></td>
+                  <td>
+                    <a
+                      class="text-light"
+                      style="text-decoration: none"
+                      href="https://github.com/2001tejasjoshi"
+                      ><i class="fab fa-github"></i> Tejas Ganesh Joshi</a
+                    >
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2022 All rights reserved.
-        <a class="text-light" href="https://github.com/Syed-maaz13/FC-49-Phantom.git"><i class="fab fa-github"></i>Github Project</a>
+        <a
+          class="text-light"
+          href="https://github.com/Syed-maaz13/FC-49-Phantom.git"
+          ><i class="fab fa-github"></i>Github Project</a
+        >
       </div>
       <!-- Copyright -->
     </footer>
