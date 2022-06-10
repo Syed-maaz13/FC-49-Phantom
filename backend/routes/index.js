@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
@@ -38,6 +39,7 @@ router.post('/', async (req, res) => {
   const qrcode = `http://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
     JSON.stringify({ source, dest, user, token })
   )}&size=400x400`;
+  const sticker = await generateSticker();
   // If everything is valid send a 200 status with a cookie of the token and information about price and the qr code itself
   res
     .status(200)
@@ -46,6 +48,7 @@ router.post('/', async (req, res) => {
       msg: `Source is ${source}, Destination is ${dest} and the username is ${user}`,
       price: `Price is Rs. ${calculatePrice(source, dest)}`,
       qrcode,
+      sticker,
     });
 });
 
@@ -89,5 +92,22 @@ const validate = (source, dest) => {
     return false;
   } else {
     return true;
+  }
+};
+
+const generateSticker = async () => {
+  try {
+    const response = await axios.get(
+      `https://messenger.stipop.io/v1/search?userId=9937&lang=en&pageNumber=1&limit=10`,
+      {
+        headers: {
+          apikey: process.env.STIPOP_APIKEY,
+        },
+      }
+    );
+    const randomnum = Math.floor(Math.random() * 10);
+    return response.data.body.stickerList[randomnum].stickerImg;
+  } catch (error) {
+    console.log(error);
   }
 };
