@@ -21,20 +21,18 @@ router.post('/', async (req, res) => {
   const { source, dest, user } = req.body;
   // If any parameters are missing, throw an error
   if (!source || !dest || !user) {
-    return res
-      .status(400)
-      .send(
-        'Paramters missing. Make sure the request contains source, dest and user.'
-      );
+    return res.status(400).render('error/400', {
+      message:
+        'Paramters missing. Make sure the request contains source, dest and user.',
+    });
   }
   // Validate if source and destination are different and present in the list of sources and destinations
   const valid = validate(source, dest);
   if (!valid) {
-    return res
-      .status(400)
-      .send(
-        'Input is invalid. Make sure source and destination are different and are a part of the provided list.'
-      );
+    return res.status(400).render('error/400', {
+      message:
+        'Input is invalid. Make sure source and destination are different and are a part of the provided list.',
+    });
   }
   // Generates a JSON Web Token with the user name and a secret key
   const token = generateToken(user);
@@ -56,20 +54,28 @@ router.post('/', async (req, res) => {
     destinations: `${source}`,
   }).select('sticker');
   if (!stickerFromDB) {
-    return res.status(404).send('No conductor found for that route!');
+    return res
+      .status(404)
+      .render('error/404', { message: 'No conductor found for that route!' });
   }
   // console.log(stickerFromDB.sticker);
-  res
-    .status(200)
-    .cookie('token', token, options)
-    .send({
-      msg: `Source is ${source}, Destination is ${dest} and the username is ${user}`,
-      price: `Price is Rs. ${calculatePrice(source, dest)}`,
-      qrcode,
-      sticker: stickerFromDB.sticker,
-    });
+  res.status(200).cookie('token', token, options).render('sticker', {
+    qrcode,
+    sticker: stickerFromDB.sticker,
+  });
 });
-
+router.get('/travel', (req, res) => {
+  res.render('travel', { layout: false });
+});
+router.get('/about', (req, res) => {
+  res.render('about', { layout: false });
+});
+router.get('/signup', (req, res) => {
+  res.render('signup', { layout: false });
+});
+router.get('/login', (req, res) => {
+  res.render('login', { layout: false });
+});
 router.post('/register', registerUser);
 router.post('/registerConductor', registerConductor);
 

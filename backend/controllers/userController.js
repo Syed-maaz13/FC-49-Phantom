@@ -12,16 +12,16 @@ const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password, phoneNumber } = req.body;
 
   // Validation
-  if (!username || !email || !password) {
-    res.status(400);
-    throw new Error('Please include all fields');
+  if (!username || !email || !password || !phoneNumber) {
+    res
+      .status(400)
+      .render('error/400', { message: 'Please include all fields' });
   }
 
   // Find if user already exists
   const userExists = await User.findOne({ email });
   if (userExists) {
-    res.status(400);
-    throw new Error('User already exists');
+    res.status(400).render('error/400', { message: 'User aready exists' });
   }
 
   // Hash Password
@@ -49,13 +49,9 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     req.user = user;
-    res
-      .status(201)
-      .cookie('token', token, options)
-      .send(`Registration successful`); //redirect to form
+    res.status(201).cookie('token', token, options).redirect('/travel'); //redirect to form
   } else {
-    res.status(400);
-    throw new Error('Invalid user data');
+    res.status(400).render('error/400', { message: 'Invalid user data' });
   }
 });
 
@@ -63,16 +59,16 @@ const registerConductor = asyncHandler(async (req, res) => {
   const { username, email, password, phoneNumber, destinations } = req.body;
 
   // Validation
-  if (!username || !email || !password) {
-    res.status(400);
-    throw new Error('Please include all fields');
+  if (!username || !email || !password || !destinations || !phoneNumber) {
+    res
+      .status(400)
+      .render('error/400', { message: 'Please include all fields' });
   }
 
   // Find if user already exists
   const userExists = await User.findOne({ email });
   if (userExists) {
-    res.status(400);
-    throw new Error('User already exists');
+    res.status(400).render('error/400', { message: 'User aready exists' });
   }
 
   // Hash Password
@@ -93,7 +89,7 @@ const registerConductor = asyncHandler(async (req, res) => {
     destinations: destinations.split(','),
     sticker,
   });
-  res.status(200).send(`Added user and conductor`);
+  res.status(200).render('/travel');
 });
 
 // @desc Login an existing user
@@ -113,10 +109,9 @@ const loginUser = asyncHandler(async (req, res) => {
       httpOnly: true,
     };
 
-    res.status(200).cookie('token', token, options).send('Login Successful');
+    res.status(200).cookie('token', token, options).redirect('/travel');
   } else {
-    res.status(401);
-    throw new Error('Invalid credentials');
+    res.status(401).render('error/400', { message: 'Invalid credentials' });
   }
 });
 
