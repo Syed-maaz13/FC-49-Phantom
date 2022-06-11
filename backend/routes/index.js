@@ -3,6 +3,14 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
+const {
+  registerUser,
+  loginUser,
+  getMe,
+} = require('../controllers/userController');
+
+const { protect } = require('../middleware/authMiddleware');
+
 // @desc Generate QR Code and Sticker
 // @route POST /
 // @access Public
@@ -52,7 +60,11 @@ router.post('/', async (req, res) => {
     });
 });
 
-module.exports = router;
+router.post('/register', registerUser);
+
+router.post('/login', loginUser);
+
+router.get('/me', protect, getMe);
 
 const calculatePrice = (source, dest) => {
   const listofDestinations = [
@@ -97,6 +109,7 @@ const validate = (source, dest) => {
 
 const generateSticker = async () => {
   try {
+    // Generates sticker from the Stipop API
     const response = await axios.get(
       `https://messenger.stipop.io/v1/search?userId=9937&lang=en&pageNumber=1&limit=10`,
       {
@@ -111,3 +124,5 @@ const generateSticker = async () => {
     console.log(error);
   }
 };
+
+module.exports = router;

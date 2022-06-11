@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express');
+const connectDB = require('./backendConfig/db');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 //adding const for handlebars
@@ -15,6 +16,9 @@ app.use(
 
 // Load config
 dotenv.config({ path: '../config/config.env' });
+
+// Connect to MongoDB
+connectDB();
 
 // Body Parser
 app.use(express.urlencoded({ extended: false }));
