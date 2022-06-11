@@ -1,6 +1,9 @@
+const path = require('path')
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+//adding const for handlebars
+const exphbs = require('express-handlebars')
 const cookieParser = require('cookie-parser');
 const app = express();
 const cors = require('cors');
@@ -23,6 +26,17 @@ app.use(cookieParser());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+//Handlebars Helpers
+const { imageSource } = require('./helpers/hbs')
+
+
+//Handlebars
+app.engine('.hbs', exphbs({defaultLayout: 'sticker', extname: '.hbs'}));
+app.set('view engine', '.hbs');
+
+//Static Folder
+//since no custom.css: app.use(express.static(path.join(_dirname, 'public')))
 
 // Routes
 app.use('/', require('./routes/index'));
