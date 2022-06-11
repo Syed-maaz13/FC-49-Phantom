@@ -50,7 +50,7 @@
               </a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href='../../sticker.html'>Your Sticker </a>
+              <a class='nav-link' href='/sticker'>Your Sticker </a>
             </li>
             <li class='nav-item'>
               <a class='nav-link' href='/about'>About</a>
@@ -64,7 +64,7 @@
     </nav>
     <div class='container mt-3' style='min-height: 50vh'>
       <div id='alertPlaceholder'></div>
-      <form id='start'>
+      <form id='start' action='/' method='POST'>
         <fieldset>
           <legend>Travel Form</legend>
 
@@ -103,6 +103,7 @@
               <option id='4001'>Pump House</option>
               <option id='5001'>East End Circle</option>
             </select>
+            <input type='hidden' value='user' name='user' />
           </div>
           <br />
           <button type='submit' id='submit' class='btn btn-primary'>

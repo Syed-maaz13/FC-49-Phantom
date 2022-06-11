@@ -70,6 +70,9 @@ router.get('/travel', (req, res) => {
 router.get('/about', (req, res) => {
   res.render('about', { layout: false });
 });
+router.get('/sticker', (req, res) => {
+  res.render('sticker');
+});
 router.get('/signup', (req, res) => {
   res.render('signup', { layout: false });
 });
