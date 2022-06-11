@@ -1,7 +1,9 @@
 const asyncHandler = require('express-async-handler');
+const { default: axios } = require('axios');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Conductor = require('../models/Conductor');
 
 // @desc Register a new user
 // @route /register
@@ -47,11 +49,51 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     req.user = user;
-    res.status(201).cookie('token', token, options).redirect('/dashboard');
+    res
+      .status(201)
+      .cookie('token', token, options)
+      .send(`Registration successful`); //redirect to form
   } else {
     res.status(400);
     throw new Error('Invalid user data');
   }
+});
+
+const registerConductor = asyncHandler(async (req, res) => {
+  const { username, email, password, phoneNumber, destinations } = req.body;
+
+  // Validation
+  if (!username || !email || !password) {
+    res.status(400);
+    throw new Error('Please include all fields');
+  }
+
+  // Find if user already exists
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    res.status(400);
+    throw new Error('User already exists');
+  }
+
+  // Hash Password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  // Create user
+  const user = await User.create({
+    username,
+    email,
+    password: hashedPassword,
+    phoneNumber,
+    role: 'Conductor',
+  });
+  const sticker = 'https://img.stipop.io/1526364515008_gg_19.png';
+
+  await Conductor.create({
+    user: user._id,
+    destinations: destinations.split(','),
+    sticker,
+  });
+  res.status(200).send(`Added user and conductor`);
 });
 
 // @desc Login an existing user
@@ -71,7 +113,7 @@ const loginUser = asyncHandler(async (req, res) => {
       httpOnly: true,
     };
 
-    res.status(200).cookie('token', token, options).redirect('/dashboard');
+    res.status(200).cookie('token', token, options).send('Login Successful');
   } else {
     res.status(401);
     throw new Error('Invalid credentials');
@@ -99,6 +141,7 @@ const generateToken = (id) => {
 
 module.exports = {
   registerUser,
+  registerConductor,
   loginUser,
   getMe,
 };

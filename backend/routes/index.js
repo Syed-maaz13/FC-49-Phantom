@@ -2,9 +2,11 @@ const { default: axios } = require('axios');
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
+const Conductor = require('../models/Conductor');
 
 const {
   registerUser,
+  registerConductor,
   loginUser,
   getMe,
 } = require('../controllers/userController');
@@ -46,9 +48,17 @@ router.post('/', async (req, res) => {
   // Get QR code image from GoQR API. Add source, dest, username and the token created above as the data
   const qrcode = `http://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
     JSON.stringify({ source, dest, user, token })
-  )}&size=400x400`;
-  const sticker = await generateSticker();
+  )}&size=150x150`;
+  // const sticker = await generateSticker();
   // If everything is valid send a 200 status with a cookie of the token and information about price and the qr code itself
+
+  const stickerFromDB = await Conductor.findOne({
+    destinations: `${source}`,
+  }).select('sticker');
+  if (!stickerFromDB) {
+    return res.status(404).send('No conductor found for that route!');
+  }
+  // console.log(stickerFromDB.sticker);
   res
     .status(200)
     .cookie('token', token, options)
@@ -56,11 +66,12 @@ router.post('/', async (req, res) => {
       msg: `Source is ${source}, Destination is ${dest} and the username is ${user}`,
       price: `Price is Rs. ${calculatePrice(source, dest)}`,
       qrcode,
-      sticker,
+      sticker: stickerFromDB.sticker,
     });
 });
 
 router.post('/register', registerUser);
+router.post('/registerConductor', registerConductor);
 
 router.post('/login', loginUser);
 

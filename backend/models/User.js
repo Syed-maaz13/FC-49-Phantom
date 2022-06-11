@@ -16,10 +16,13 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     validate: {
       validator: (v) => {
-        return /d{10}/.test(v);
+        return /\d{10}/.test(v);
       },
       message: '{VALUE} is not a valid 10 digit number!',
     },
+  },
+  role: {
+    type: String,
   },
   createdAt: {
     type: Date,
