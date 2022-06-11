@@ -6,29 +6,32 @@
     <tbody>
       <tr class='table-primary'>
         <th scope='row'>Transcation ID</th>
-        <td id='tid'>{{TID}}</td>
+        <td id='tid'>123456yhsgcdjajk</td>
       </tr>
       <tr class='table-secondary'>
         <th scope='row'>Passenger name</th>
-        <td id='passengername'>{{Name}}</td>
+        <td id='passengername'>{{user}}</td>
       </tr>
       <tr class='table-primary'>
         <th scope='row'>Date</th>
-        <td id='date'>{{{dateFormat 'LL' timeStamp}}}</td>
+        <td id='date'>11-06-2022</td>
       </tr>
-      <tr class='table-secondary'>
-        <th scope='row'>Time</th>
-        <td id='time'>{{{dateFormat 'LT' timeStamp}}}</td>
-      </tr>
+
       <tr class='table-primary'>
         <th scope='row'>Boarding point</th>
         <td id='bpoint'>{{source}}</td>
       </tr>
       <tr class='table-secondary'>
         <th scope='row'>Destination point</th>
-        <td id='dpoint'>{{destination}}</td>
+        <td id='dpoint'>{{dest}}</td>
       </tr>
     </tbody>
   </table><br />
-  <h1>Total Fare = Rs.</h1>{{fare}}<h1 id='fare'></h1>
+  <h1>Total Fare = Rs.{{price}}</h1>
+  <form action='/qr' method='POST'>
+    <input type='hidden' name='user' value='{{user}}' />
+    <input type='hidden' name='source' value='{{source}}' />
+    <input type='hidden' name='dest' value='{{dest}}' />
+    <button type='submit'>Get sticker and QR Code</button>
+  </form>
 </div>

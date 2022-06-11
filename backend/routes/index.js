@@ -59,10 +59,67 @@ router.post('/', async (req, res) => {
       .render('error/404', { message: 'No conductor found for that route!' });
   }
   // console.log(stickerFromDB.sticker);
+  const price = calculatePrice(source, dest);
+  res
+    .status(200)
+    .cookie('token', token, options)
+    .render('invoice', { price, user, source, dest });
+  // res.status(200).cookie('token', token, options).render('sticker', {
+  //   qrcode,
+  //   sticker: stickerFromDB.sticker,
+  // });
+});
+router.post('/qr', async (req, res) => {
+  // Get source, destination and username from the body of the POST call
+  const { source, dest, user } = req.body;
+  // If any parameters are missing, throw an error
+  if (!source || !dest || !user) {
+    return res.status(400).render('error/400', {
+      message:
+        'Paramters missing. Make sure the request contains source, dest and user.',
+    });
+  }
+  // Validate if source and destination are different and present in the list of sources and destinations
+  const valid = validate(source, dest);
+  if (!valid) {
+    return res.status(400).render('error/400', {
+      message:
+        'Input is invalid. Make sure source and destination are different and are a part of the provided list.',
+    });
+  }
+  // Generates a JSON Web Token with the user name and a secret key
+  const token = generateToken(user);
+  // The cookie created expires in JWT_COOKIE_EXPIRE number of days
+  const options = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  // Get QR code image from GoQR API. Add source, dest, username and the token created above as the data
+  const qrcode = `http://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(
+    JSON.stringify({ source, dest, user, token })
+  )}&size=150x150`;
+  // const sticker = await generateSticker();
+  // If everything is valid send a 200 status with a cookie of the token and information about price and the qr code itself
+
+  const stickerFromDB = await Conductor.findOne({
+    destinations: `${source}`,
+  }).select('sticker');
+  if (!stickerFromDB) {
+    return res
+      .status(404)
+      .render('error/404', { message: 'No conductor found for that route!' });
+  }
+  // console.log(stickerFromDB.sticker);
+  const price = calculatePrice(source, dest);
   res.status(200).cookie('token', token, options).render('sticker', {
     qrcode,
     sticker: stickerFromDB.sticker,
   });
+});
+router.get('/', (req, res) => {
+  res.render('travel', { layout: false });
 });
 router.get('/travel', (req, res) => {
   res.render('travel', { layout: false });

@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const { default: axios } = require('axios');
 const connectDB = require('./backendConfig/db');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
